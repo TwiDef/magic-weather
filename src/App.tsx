@@ -1,12 +1,21 @@
-import Reac, { useState } from 'react'
-
-import './App.css'
+import styles from './App.module.css'
+import Cities from './components/cities/Cities'
+import CurrentWeather from './components/current-weather/CurrentWeather'
+import Forecast from './components/forecast/Forecast'
+import LocalDate from './components/local-date/LocalDate'
+import Search from './components/search/Search'
 
 function App() {
   return (
-    <>
-      <p className='text-3xl font-bold underline'>text</p>
-    </>
+    <main className='container mx-auto sm:w-1/2'>
+      <div className={styles.wrapper}>
+        <Cities />
+        <Search />
+        <LocalDate />
+        <CurrentWeather />
+        <Forecast />
+      </div>
+    </main>
   )
 }
 
