@@ -4,8 +4,8 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa6";
 
 const CurrentWeather: React.FC = () => {
     return (
-        <div className='current-weather bg-slate-200 mt-5 text-gray-600 rounded-3xl w-full h-44 p-1'>
-            <h1 className='text-center text-lg font-bold'>London</h1>
+        <div className='current-weather bg-slate-200 mt-5 text-gray-600 rounded-3xl w-full h-48 p-1'>
+            <h1 className='text-center text-lg font-bold mt-2'>London</h1>
             <h3 className='text-center text-sm'>Partly cloudy</h3>
             <div className='flex items-center justify-around pt-3'>
                 <div className='w-28 flex items-center justify-center'>
@@ -18,7 +18,7 @@ const CurrentWeather: React.FC = () => {
                     <li className='font-semibold text-sm'>Wind <span>10km/h</span></li>
                 </ul>
             </div>
-            <ul className='flex items-center justify-between px-2 mt-4'>
+            <ul className='flex items-center justify-evenly px-2 mt-4'>
                 <li className='font-bold text-xs flex items-center gap-2'>
                     <BsFillSunriseFill />
                     Rise: 04:50 AM
