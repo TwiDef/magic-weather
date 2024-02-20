@@ -1,7 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getLocationInfo } from "../../services/weatherService";
+import weatherService from "../../services/weatherService";
 
-export const fetchLocationInfo = createAsyncThunk('location/fetchLocatinInfo', getLocationInfo)
+export const fetchLocationInfo = createAsyncThunk('location/fetchLocatinInfo', async (cityname: string, thunkAPI) => {
+    try {
+        return await weatherService.getLocationInfo(cityname)
+    } catch (error: any) {
+        return thunkAPI.rejectWithValue(error.response.data)
+    }
+})
 
 enum Status {
     LOADING = 'loading',
@@ -11,19 +17,17 @@ enum Status {
 
 interface ILocationSlice {
     name: string | null
-    localtime: string | null,
+    localtime_epoch: number | null,
     country: string | null
     status: Status.LOADING | Status.SUCCESS | Status.ERROR
 }
 
 const initialState: ILocationSlice = {
     name: null,
-    localtime: null,
+    localtime_epoch: null,
     country: null,
     status: Status.LOADING
 }
-
-
 
 const locationSlice = createSlice({
     name: 'location',
@@ -36,8 +40,12 @@ const locationSlice = createSlice({
         builder.addCase(fetchLocationInfo.fulfilled, (state, action) => {
             state.status = Status.SUCCESS
             state.name = action.payload.name
-            state.localtime = action.payload.localtime
+            state.localtime_epoch = action.payload.localtime_epoch
             state.country = action.payload.country
+        })
+        builder.addCase(fetchLocationInfo.rejected, (state) => {
+            state.status = Status.ERROR
+
         })
     }
 })
