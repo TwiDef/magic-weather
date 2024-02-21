@@ -45,7 +45,6 @@ const locationSlice = createSlice({
         })
         builder.addCase(fetchLocationInfo.rejected, (state) => {
             state.status = Status.ERROR
-
         })
     }
 })

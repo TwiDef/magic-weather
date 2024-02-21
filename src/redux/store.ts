@@ -3,11 +3,13 @@ import { useDispatch } from 'react-redux';
 
 import locationSlice from "./slices/locationSlice";
 import currentSlice from "./slices/currentSlice";
+import forecastSlice from "./slices/forecastSlice";
 
 export const store = configureStore({
     reducer: {
         locationInfo: locationSlice,
-        currentInfo: currentSlice
+        currentInfo: currentSlice,
+        focast: forecastSlice
     }
 })
 

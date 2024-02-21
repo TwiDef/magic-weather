@@ -7,15 +7,17 @@ import Search from './components/search/Search'
 
 function App() {
   return (
-    <main className='container mx-auto sm:w-1/2'>
-      <div className={styles.wrapper}>
-        <Cities />
-        <Search />
-        <LocalDate />
-        <CurrentWeather />
-        <Forecast />
-      </div>
-    </main>
+    <>
+      <main className='container mx-auto sm:w-1/2'>
+        <div className={styles.wrapper}>
+          <Cities />
+          <Search />
+          <LocalDate />
+          <CurrentWeather />
+          <Forecast />
+        </div>
+      </main >
+    </>
   )
 }
 

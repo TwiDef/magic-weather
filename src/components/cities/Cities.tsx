@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
-import { fetchLocationInfo } from '../../redux/slices/locationSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+
 import { fetchCurrentInfo } from '../../redux/slices/currentSlice';
+import { fetchLocationInfo } from '../../redux/slices/locationSlice';
+import { fetchForecastInfo } from '../../redux/slices/forecastSlice';
 
 const Cities: React.FC = () => {
 
@@ -12,6 +14,7 @@ const Cities: React.FC = () => {
     useEffect(() => {
         dispatch(fetchLocationInfo('sochi'))
         dispatch(fetchCurrentInfo('sochi'))
+        dispatch(fetchForecastInfo('sochi'))
     }, [])
 
     return (
