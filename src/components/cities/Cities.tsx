@@ -8,13 +8,14 @@ import { fetchForecastInfo } from '../../redux/slices/forecastSlice';
 const Cities: React.FC = () => {
 
     const dispatch = useAppDispatch()
+    const { cityName } = useAppSelector(state => state.city)
     /* const { name, localtime_epoch, country } = useAppSelector(state => state.locationInfo) */
     /* const { condition, feelslike_c } = useAppSelector(state => state.currentInfo) */
 
     useEffect(() => {
-        dispatch(fetchLocationInfo('sochi'))
-        dispatch(fetchCurrentInfo('sochi'))
-        dispatch(fetchForecastInfo('sochi'))
+        dispatch(fetchLocationInfo(cityName))
+        dispatch(fetchCurrentInfo(cityName))
+        dispatch(fetchForecastInfo(cityName))
     }, [])
 
     return (

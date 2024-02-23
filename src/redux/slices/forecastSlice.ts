@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import weatherService from "../../services/weatherService";
-import { TCondition } from "./currentSlice";
 
 export const fetchForecastInfo = createAsyncThunk('current/fetchForecastInfo', async (cityname: string, thunkAPI) => {
     try {
@@ -18,14 +17,12 @@ enum Status {
 
 interface IForecastSlice {
     astro: [] | null,
-    condition: TCondition[] | null,
     hour: [] | null,
     status: Status
 }
 
 const initialState: IForecastSlice = {
     astro: null,
-    condition: null,
     hour: null,
     status: Status.LOADING
 }
@@ -41,7 +38,6 @@ const forecastSlice = createSlice({
         builder.addCase(fetchForecastInfo.fulfilled, (state, action) => {
             state.status = Status.SUCCESS
             state.astro = action.payload.astro
-            state.condition = action.payload.condition
             state.hour = action.payload.hour
         })
         builder.addCase(fetchForecastInfo.rejected, (state) => {
@@ -49,7 +45,6 @@ const forecastSlice = createSlice({
         })
     }
 })
-
 
 export const { } = forecastSlice.actions
 export default forecastSlice.reducer

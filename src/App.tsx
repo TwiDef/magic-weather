@@ -8,7 +8,7 @@ import Search from './components/search/Search'
 function App() {
   return (
     <>
-      <main className='container mx-auto sm:w-1/2'>
+      <main className='mx-auto xl:w-1/3 sm:w-1/2'>
         <div className={styles.wrapper}>
           <Cities />
           <Search />
