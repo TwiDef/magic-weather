@@ -5,7 +5,7 @@ import { TCondition } from "../redux/slices/currentSlice";
 /* Location */
 export type TLocationInfo = {
     name: string,
-    localtime_epoch: number,
+    localtime_epoch: number | null,
     country: string,
     region: string
 }

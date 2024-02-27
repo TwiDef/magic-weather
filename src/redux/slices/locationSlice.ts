@@ -17,14 +17,15 @@ enum Status {
 
 interface ILocationSlice {
     name: string | null
-    localtime_epoch: number | null,
+    localtime_epoch: number,
+
     country: string | null
     status: Status.LOADING | Status.SUCCESS | Status.ERROR
 }
 
 const initialState: ILocationSlice = {
     name: null,
-    localtime_epoch: null,
+    localtime_epoch: 0,
     country: null,
     status: Status.LOADING
 }

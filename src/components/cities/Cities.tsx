@@ -1,30 +1,27 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import React from 'react';
+import { useAppDispatch } from '../../redux/hooks';
 
-import { fetchCurrentInfo } from '../../redux/slices/currentSlice';
-import { fetchLocationInfo } from '../../redux/slices/locationSlice';
-import { fetchForecastInfo } from '../../redux/slices/forecastSlice';
+import { setCity } from '../../redux/slices/citySlice';
 
 const Cities: React.FC = () => {
 
     const dispatch = useAppDispatch()
-    const { cityName } = useAppSelector(state => state.city)
-    /* const { name, localtime_epoch, country } = useAppSelector(state => state.locationInfo) */
-    /* const { condition, feelslike_c } = useAppSelector(state => state.currentInfo) */
 
-    useEffect(() => {
-        dispatch(fetchLocationInfo(cityName))
-        dispatch(fetchCurrentInfo(cityName))
-        dispatch(fetchForecastInfo(cityName))
-    }, [])
+    const cities = ['Paris', 'Sydney', 'Berlin', 'Sochi', 'Alaska']
 
     return (
         <ul className='cities flex justify-between flex-wrap  w-full'>
-            <li className='text-lg font-bold hover:underline cursor-pointer'>Paris</li>
-            <li className='text-lg font-bold hover:underline cursor-pointer'>Sydney</li>
-            <li className='text-lg font-bold hover:underline cursor-pointer'>Tokio</li>
-            <li className='text-lg font-bold hover:underline cursor-pointer'>Sochi</li>
-            <li className='text-lg font-bold hover:underline cursor-pointer'>Alaska</li>
+            {
+                cities.map((city, i: number) => {
+                    return (
+                        <li key={i}
+                            onClick={() => dispatch(setCity(city))}
+                            className='text-lg font-bold hover:underline cursor-pointer'>
+                            {city}
+                        </li>
+                    )
+                })
+            }
         </ul>
     );
 };
