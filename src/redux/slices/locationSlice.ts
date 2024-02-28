@@ -17,7 +17,8 @@ enum Status {
 
 interface ILocationSlice {
     name: string | null
-    localtime_epoch: number,
+    localtime_epoch: number | null,
+    localtime: string | null,
 
     country: string | null
     status: Status.LOADING | Status.SUCCESS | Status.ERROR
@@ -25,7 +26,8 @@ interface ILocationSlice {
 
 const initialState: ILocationSlice = {
     name: null,
-    localtime_epoch: 0,
+    localtime_epoch: null,
+    localtime: null,
     country: null,
     status: Status.LOADING
 }
@@ -42,6 +44,7 @@ const locationSlice = createSlice({
             state.status = Status.SUCCESS
             state.name = action.payload.name
             state.localtime_epoch = action.payload.localtime_epoch
+            state.localtime = action.payload.localtime
             state.country = action.payload.country
         })
         builder.addCase(fetchLocationInfo.rejected, (state) => {

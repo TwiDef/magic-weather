@@ -10,7 +10,7 @@ export const store = configureStore({
     reducer: {
         locationInfo: locationSlice,
         currentInfo: currentSlice,
-        focast: forecastSlice,
+        forecast: forecastSlice,
         city: citySlice
     }
 })

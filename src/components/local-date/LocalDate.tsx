@@ -2,21 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../../redux/hooks';
 
 const LocalDate: React.FC = () => {
-    let [localtime, setLocaltime] = useState<number>(0)
+    let [time, setTime] = useState<number>(0)
 
-    const { localtime_epoch } = useAppSelector(state => state.locationInfo)
+    const { localtime_epoch, localtime } = useAppSelector(state => state.locationInfo)
 
     useEffect(() => {
         if (localtime_epoch) {
-            setLocaltime(localtime_epoch)
+            setTime(localtime_epoch)
         }
     }, [localtime_epoch])
 
-    const mounth = (new Date(localtime ? localtime * 1000 : 0)).getMonth()
-    const date = (new Date(localtime ? localtime * 1000 : 0)).getDate()
-    const day = (new Date(localtime ? localtime * 1000 : 0)).getDay()
-    const hours = (new Date(localtime ? localtime * 1000 : 0)).getHours()
-    const minutes = (new Date(localtime ? localtime * 1000 : 0)).getMinutes()
+    const mounth = (new Date(time ? time * 1000 : 0)).getMonth()
+    const date = (new Date(time ? time * 1000 : 0)).getDate()
+    const day = (new Date(time ? time * 1000 : 0)).getDay()
 
 
     const days = ['Sunday', 'Monday', 'Tuesday',
@@ -32,7 +30,7 @@ const LocalDate: React.FC = () => {
         <div className='flex mt-4'>
             <h3>{days[day]}, {date} {mounths[mounth]}</h3>
             <span className='px-2'>|</span>
-            <h3>Local time: {`${hours}:${minutes < 10 ? '0' + minutes : minutes}`}</h3>
+            <h3>Local time: {localtime ? localtime.slice(-5) : '00:00'}</h3>
         </div>
     );
 };

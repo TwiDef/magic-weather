@@ -1,10 +1,21 @@
 import React from 'react';
+
+import { useAppDispatch } from '../../redux/hooks';
+import { toggleTempType } from '../../redux/slices/currentSlice';
+
 import { FaSearch } from "react-icons/fa";
 import { BsFillGeoAltFill } from "react-icons/bs";
 import { RiCelsiusLine } from "react-icons/ri";
 import { RiFahrenheitFill } from "react-icons/ri";
 
 const Search: React.FC = () => {
+
+    const dispatch = useAppDispatch()
+
+    const onChangeTempType = (type: string) => {
+        dispatch(toggleTempType(type))
+    }
+
     return (
         <div className='search-block flex pt-4 gap-8'>
             <div className='flex  items-center gap-4'>
@@ -15,9 +26,9 @@ const Search: React.FC = () => {
                 </div>
             </div>
             <div className='search-converter flex items-center'>
-                <button><RiCelsiusLine /></button>
+                <button onClick={() => onChangeTempType('c')}><RiCelsiusLine /></button>
                 <span className=' px-2'>/</span>
-                <button><RiFahrenheitFill /></button>
+                <button onClick={() => onChangeTempType('f')}><RiFahrenheitFill /></button>
             </div>
         </div>
     );

@@ -6,6 +6,7 @@ import { TCondition } from "../redux/slices/currentSlice";
 export type TLocationInfo = {
     name: string,
     localtime_epoch: number | null,
+    localtime: string | null,
     country: string,
     region: string
 }
@@ -14,9 +15,9 @@ const getLocationInfo = async (cityname: string) => {
     const { data } = await axios
         .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`)
 
-    const { name, localtime_epoch, country, region }: TLocationInfo = data.location
+    const { name, localtime_epoch, localtime, country, region }: TLocationInfo = data.location
 
-    return { name, localtime_epoch, country, region }
+    return { name, localtime_epoch, localtime, country, region }
 }
 /* Location */
 

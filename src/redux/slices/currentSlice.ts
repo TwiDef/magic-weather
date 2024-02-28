@@ -15,13 +15,14 @@ enum Status {
     ERROR = 'error'
 }
 
-export type TCondition = {
+export type TCondition = [
     code: number,
     icon: string,
     text: string
-}
+]
 
 interface ICurrentSlice {
+    temp_type: string,
     condition: TCondition[] | null,
     feelslike_c: number | null,
     feelslike_f: number | null,
@@ -34,6 +35,7 @@ interface ICurrentSlice {
 }
 
 const initialState: ICurrentSlice = {
+    temp_type: 'c',
     condition: null,
     feelslike_c: null,
     feelslike_f: null,
@@ -48,7 +50,11 @@ const initialState: ICurrentSlice = {
 const currentSlice = createSlice({
     name: 'current',
     initialState,
-    reducers: {},
+    reducers: {
+        toggleTempType: (state, action) => {
+            state.temp_type = action.payload
+        }
+    },
     extraReducers: builder => {
         builder.addCase(fetchCurrentInfo.pending, (state) => {
             state.status = Status.LOADING
@@ -70,5 +76,5 @@ const currentSlice = createSlice({
     }
 })
 
-export const { } = currentSlice.actions
+export const { toggleTempType } = currentSlice.actions
 export default currentSlice.reducer
