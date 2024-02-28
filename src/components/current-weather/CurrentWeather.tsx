@@ -49,7 +49,7 @@ const CurrentWeather: React.FC = () => {
             <h1 className='text-center text-lg font-bold mt-2'>{cityName}</h1>
 
             <h3 className='text-center text-sm'>{condition?.text}</h3>
-            <div className='flex items-center justify-around pt-3'>
+            <div className='flex items-center justify-around pt-3 gap-4'>
                 <div className='w-28 flex items-center justify-center'>
 
                     <img className=' w-20' src={condition?.icon} alt="icon" />

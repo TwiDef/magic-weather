@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch } from '../../redux/hooks';
-
 import { setCity } from '../../redux/slices/citySlice';
 
+import './Cities.css';
+
 const Cities: React.FC = () => {
+    const [cities, setCities] = useState([
+        { name: 'Paris', active: false },
+        { name: 'Sydney', active: false },
+        { name: 'Berlin', active: false },
+        { name: 'Sochi', active: true },
+        { name: 'Alaska', active: false }
+    ])
 
     const dispatch = useAppDispatch()
 
-    const cities = ['Paris', 'Sydney', 'Berlin', 'Sochi', 'Alaska']
+
+    const onSetActiveCity = (city: any) => {
+        dispatch(setCity(city.name))
+
+        cities.forEach(city => city.active = false)
+        city.active = true
+    }
 
     return (
         <ul className='cities flex justify-between flex-wrap  w-full'>
@@ -15,9 +29,10 @@ const Cities: React.FC = () => {
                 cities.map((city, i: number) => {
                     return (
                         <li key={i}
-                            onClick={() => dispatch(setCity(city))}
-                            className='text-lg font-bold hover:underline cursor-pointer'>
-                            {city}
+                            onClick={() => onSetActiveCity(city)}
+                            className={`${city.active ? 'active-city' : ''}
+                            text-lg font-bold cursor-pointer`}>
+                            {city.name}
                         </li>
                     )
                 })

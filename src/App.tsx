@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 
-import styles from './App.module.css'
+import './App.css'
 import Cities from './components/cities/Cities'
 import CurrentWeather from './components/current-weather/CurrentWeather'
 import Forecast from './components/forecast/Forecast'
@@ -26,7 +26,7 @@ const App: React.FC = () => {
     return (
         <>
             <main className='mx-auto xl:w-1/3 sm:w-1/2'>
-                <div className={styles.wrapper}>
+                <div className='wrapper'>
                     <Cities />
                     <Search />
                     <LocalDate />
