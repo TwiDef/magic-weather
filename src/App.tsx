@@ -25,7 +25,9 @@ const App: React.FC = () => {
 
     return (
         <>
-            <main className='mx-auto xl:w-1/3 sm:w-1/2'>
+            <main
+                className='mx-auto xl:w-1/3 lg:w-1/2 md:w-2/3
+                 '>
                 <div className='wrapper'>
                     <Cities />
                     <Search />

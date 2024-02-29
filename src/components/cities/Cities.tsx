@@ -15,7 +15,6 @@ const Cities: React.FC = () => {
 
     const dispatch = useAppDispatch()
 
-
     const onSetActiveCity = (city: any) => {
         dispatch(setCity(city.name))
 

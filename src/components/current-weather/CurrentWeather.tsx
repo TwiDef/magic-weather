@@ -45,39 +45,42 @@ const CurrentWeather: React.FC = () => {
     }
 
     return (
-        <div className='current-weather bg-slate-200 mt-5 text-gray-600 rounded-3xl w-full h-48 p-1'>
-            <h1 className='text-center text-lg font-bold mt-2'>{cityName}</h1>
+        <div className='current-weather bg-slate-200 mt-5 text-gray-600 rounded-3xl w-full h-48 p-1
+        max-sm:h-44 max-sm:mt-3'>
+            <h1 className='text-center text-lg font-bold mt-2 max-sm:mt-0'>
+                {(cityName.slice(0, 1)).toUpperCase() + cityName.slice(1)}
+            </h1>
 
             <h3 className='text-center text-sm'>{condition?.text}</h3>
-            <div className='flex items-center justify-around pt-3 gap-4'>
+            <div className='flex items-center justify-around pt-3 gap-4 max-sm:pt-0 max-sm:gap-1'>
                 <div className='w-28 flex items-center justify-center'>
 
                     <img className=' w-20' src={condition?.icon} alt="icon" />
                 </div>
-                <h3 className='w-28 text-6xl font-bold flex items-center justify-center'>
+                <h3 className='w-28 text-6xl font-bold flex items-center justify-center max-sm:text-5xl'>
                     {temp_type === 'c' ? temp_c + "°c" : Math.round(temp_f ? temp_f : 0) + "°f"}
                 </h3>
                 <ul className='flex w-28 flex-col items-start justify-center gap-1'>
-                    <li className='font-semibold text-sm flex items-center'>
+                    <li className='font-semibold text-sm flex items-center max-sm:text-xs'>
                         <FaThermometerEmpty />
                         <p className='mx-1'>Real felt:</p>
                         {temp_type === 'c' ?
                             Math.round(feelslike_c ? feelslike_c : 0) + "°c" :
                             Math.round(feelslike_f ? feelslike_f : 0) + "°f"}
                     </li>
-                    <li className='font-semibold text-sm flex items-center'>
+                    <li className='font-semibold text-sm flex items-center max-sm:text-xs'>
                         <FaDroplet />
                         <p className='mx-1'>Humidity:</p>
                         <span>{humidity}%</span>
                     </li>
-                    <li className='font-semibold text-sm flex items-center'>
+                    <li className='font-semibold text-sm flex items-center max-sm:text-xs'>
                         <SiTailwindcss />
                         <p className='mx-1'>Wind:</p>
                         <span>{wind_kph}km/h</span>
                     </li>
                 </ul>
             </div>
-            <ul className='flex items-center justify-evenly px-2 mt-2'>
+            <ul className='flex items-center justify-evenly px-2 mt-2 max-sm:mt-0'>
                 <li className='font-bold text-xs flex items-center gap-2'>
                     <BsFillSunriseFill />
                     Rise: {astro ? astro.sunrise : '00:00'}

@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface ICityNameSlice {
     cityName: string
-    searchValue: string | null
+    searchValue: string
 }
 
 const initialState: ICityNameSlice = {
     cityName: 'Sochi',
-    searchValue: null
+    searchValue: ''
 }
 
 const citySlice = createSlice({
@@ -16,9 +16,15 @@ const citySlice = createSlice({
     reducers: {
         setCity: (state, action) => {
             state.cityName = action.payload
+        },
+        setSearchValue: (state, action) => {
+            state.searchValue = action.payload
+        },
+        clearSearchValue: (state) => {
+            state.searchValue = ''
         }
     }
 })
 
-export const { setCity } = citySlice.actions
+export const { setCity, setSearchValue, clearSearchValue } = citySlice.actions
 export default citySlice.reducer
