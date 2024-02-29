@@ -1,31 +1,28 @@
-import React, { useState } from 'react';
 import { useAppDispatch } from '../../redux/hooks';
 import { setCity } from '../../redux/slices/citySlice';
+import { TCity } from '../../App';
 
 import './Cities.css';
 
-const Cities: React.FC = () => {
-    const [cities, setCities] = useState([
-        { name: 'Paris', active: false },
-        { name: 'Sydney', active: false },
-        { name: 'Berlin', active: false },
-        { name: 'Sochi', active: true },
-        { name: 'Alaska', active: false }
-    ])
+type PropsType = {
+    cities: TCity[],
+    removeActiveCity: Function
+}
+
+const Cities = (props: PropsType) => {
 
     const dispatch = useAppDispatch()
 
     const onSetActiveCity = (city: any) => {
         dispatch(setCity(city.name))
-
-        cities.forEach(city => city.active = false)
+        props.removeActiveCity(props.cities)
         city.active = true
     }
 
     return (
         <ul className='cities flex justify-between flex-wrap  w-full'>
             {
-                cities.map((city, i: number) => {
+                props.cities.map((city, i: number) => {
                     return (
                         <li key={i}
                             onClick={() => onSetActiveCity(city)}

@@ -13,7 +13,9 @@ export type TLocationInfo = {
 
 const getLocationInfo = async (cityname: string) => {
     const { data } = await axios
-        .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`)
+        .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`, {
+            withCredentials: false
+        })
 
     const { name, localtime_epoch, localtime, country, region }: TLocationInfo = data.location
 
@@ -35,7 +37,9 @@ export type TCurrentInfo = {
 }
 const getCurrentInfo = async (cityname: string) => {
     const { data } = await axios
-        .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`)
+        .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`, {
+            withCredentials: false
+        })
 
     const { condition, feelslike_c, feelslike_f,
         humidity, pressure_mb, temp_c,
@@ -60,7 +64,9 @@ export type TForecastInfo = {
 
 const getForecastInfo = async (cityname: string) => {
     const { data } = await axios
-        .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`)
+        .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`, {
+            withCredentials: false
+        })
 
     const { astro, hour }: TForecastInfo = data.forecast.forecastday[0]
     const { condition }: TForecastInfo = data.forecast.forecastday[0].day

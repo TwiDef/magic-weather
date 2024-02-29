@@ -16,7 +16,7 @@ enum Status {
 }
 
 interface ILocationSlice {
-    name: string | null
+    name: string
     localtime_epoch: number | null,
     localtime: string | null,
 
@@ -25,7 +25,7 @@ interface ILocationSlice {
 }
 
 const initialState: ILocationSlice = {
-    name: null,
+    name: "",
     localtime_epoch: null,
     localtime: null,
     country: null,

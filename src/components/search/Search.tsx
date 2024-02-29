@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { toggleTempType } from '../../redux/slices/currentSlice';
 import { setCity, setSearchValue, clearSearchValue } from '../../redux/slices/citySlice';
@@ -11,10 +9,16 @@ import { FaSearch } from "react-icons/fa";
 import { BsFillGeoAltFill } from "react-icons/bs";
 import { RiCelsiusLine } from "react-icons/ri";
 import { RiFahrenheitFill } from "react-icons/ri";
+import { TCity } from '../../App';
 
 import './Search.css';
 
-const Search: React.FC = () => {
+type PropsType = {
+    cities: TCity[]
+    removeActiveCity: Function
+}
+
+const Search = (props: PropsType) => {
     const { temp_type } = useAppSelector(state => state.currentInfo)
     const { searchValue } = useAppSelector(state => state.city)
     const dispatch = useAppDispatch()
@@ -29,8 +33,8 @@ const Search: React.FC = () => {
         dispatch(fetchForecastInfo(searchValue))
         dispatch(setCity(searchValue))
         dispatch(clearSearchValue())
+        props.removeActiveCity(props.cities)
     }
-
 
     return (
         <div className='search-block flex pt-4 gap-8

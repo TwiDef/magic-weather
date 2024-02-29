@@ -12,7 +12,7 @@ const CurrentWeather: React.FC = () => {
     let [tempOfDayF, setTempOfDayF] = useState<number[]>([])
 
     const { temp_type, status } = useAppSelector(state => state.currentInfo)
-    const { cityName } = useAppSelector(state => state.city)
+    const { name, country } = useAppSelector(state => state.locationInfo)
     const { astro } = useAppSelector(state => state.forecast)
     const { hour } = useAppSelector(state => state.forecast)
     const { condition, feelslike_c, feelslike_f, humidity,
@@ -48,7 +48,7 @@ const CurrentWeather: React.FC = () => {
         <div className='current-weather bg-slate-200 mt-5 text-gray-600 rounded-3xl w-full h-48 p-1
         max-sm:h-44 max-sm:mt-3'>
             <h1 className='text-center text-lg font-bold mt-2 max-sm:mt-0'>
-                {(cityName.slice(0, 1)).toUpperCase() + cityName.slice(1)}
+                {(name.slice(0, 1)).toUpperCase() + name.slice(1)}, {country}
             </h1>
 
             <h3 className='text-center text-sm'>{condition?.text}</h3>
