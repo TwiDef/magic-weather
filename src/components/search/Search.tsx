@@ -43,9 +43,9 @@ const Search = (props: PropsType) => {
 
     return (
         <div className='search-block flex pt-4 gap-8
-        max-sm:gap-0'>
+        max-sm:gap-0 max-2xl:gap-4'>
             <div className='flex items-center gap-4
-             max-sm:gap-0'>
+             max-sm:gap-0 max-2xl:gap-4'>
                 <div className='relative'>
                     <input
                         className='city-input bg-slate-200 p-1 px-2 rounded-lg text-lg text-black placeholder:text-lg'
