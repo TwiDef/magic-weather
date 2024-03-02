@@ -20,8 +20,8 @@ const CurrentWeather: React.FC = () => {
 
     useEffect(() => {
         if (hour) {
-            setTempOfDayC(hour.map(h => h.temp_c))
-            setTempOfDayF(hour.map(h => h.temp_f))
+            setTempOfDayC(hour.map((h: any) => h.temp_c))
+            setTempOfDayF(hour.map((h: any) => h.temp_f))
         }
     }, [hour])
 

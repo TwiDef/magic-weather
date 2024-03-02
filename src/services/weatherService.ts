@@ -26,7 +26,7 @@ const getLocationInfo = async (cityname: string) => {
 
 /* Current */
 export type TCurrentInfo = {
-    condition: TCondition[],
+    condition: TCondition,
     feelslike_c: number,
     feelslike_f: number,
     humidity: number,
@@ -57,9 +57,9 @@ const getCurrentInfo = async (cityname: string) => {
 /* Forecast */
 
 export type TForecastInfo = {
-    astro: [],
-    hour: [],
-    condition: TCondition[]
+    astro: any,
+    hour: any,
+    condition: TCondition
 }
 
 const getForecastInfo = async (cityname: string) => {

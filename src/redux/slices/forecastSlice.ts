@@ -16,8 +16,8 @@ enum Status {
 }
 
 interface IForecastSlice {
-    astro: [] | null,
-    hour: [] | null,
+    astro: any,
+    hour: any,
     status: Status
 }
 

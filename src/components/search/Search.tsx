@@ -9,6 +9,7 @@ import { FaSearch } from "react-icons/fa";
 import { BsFillGeoAltFill } from "react-icons/bs";
 import { RiCelsiusLine } from "react-icons/ri";
 import { RiFahrenheitFill } from "react-icons/ri";
+import { RxCross2 } from "react-icons/rx";
 import { TCity } from '../../App';
 
 import './Search.css';
@@ -36,17 +37,30 @@ const Search = (props: PropsType) => {
         props.removeActiveCity(props.cities)
     }
 
+    const onHandleKeyDown = (e: any) => {
+        e.keyCode === 13 ? onSearchInfo() : null
+    }
+
     return (
         <div className='search-block flex pt-4 gap-8
         max-sm:gap-0'>
             <div className='flex items-center gap-4
              max-sm:gap-0'>
-                <input
-                    className='bg-slate-200 p-1 px-2 rounded-lg text-lg text-black placeholder:text-lg'
-                    value={searchValue}
-                    onChange={(e) => dispatch(setSearchValue(e.target.value))}
-                    type="text"
-                    placeholder='Enter city...' />
+                <div className='relative'>
+                    <input
+                        className='city-input bg-slate-200 p-1 px-2 rounded-lg text-lg text-black placeholder:text-lg'
+                        value={searchValue}
+                        onChange={(e) => dispatch(setSearchValue(e.target.value))}
+                        onKeyDown={(e) => onHandleKeyDown(e)}
+                        type="text"
+                        placeholder='Enter city...' />
+                    {searchValue ?
+                        <button
+                            onClick={() => dispatch(clearSearchValue())}
+                            className='remove-input__btn'>
+                            <RxCross2 className='w-6 h-6' />
+                        </button> : null}
+                </div>
                 <div className='search-icons flex px-2 gap-3'>
                     <button onClick={onSearchInfo}><FaSearch /></button>
                     <button><BsFillGeoAltFill /></button>

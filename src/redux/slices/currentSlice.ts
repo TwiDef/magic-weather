@@ -15,15 +15,15 @@ enum Status {
     ERROR = 'error'
 }
 
-export type TCondition = [
+export type TCondition = {
     code: number,
     icon: string,
     text: string
-]
+}
 
 interface ICurrentSlice {
     temp_type: string,
-    condition: TCondition[] | null,
+    condition: TCondition | null,
     feelslike_c: number | null,
     feelslike_f: number | null,
     humidity: number | null,
