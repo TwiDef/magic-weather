@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import './Forecast.css';
 
 const Forecast: React.FC = () => {
-    const [filteredByHours, setFilteredByHours] = useState([])
+    const [filteredByHours, setFilteredByHours] = useState<any>([])
     const { hour, status } = useAppSelector(state => state.forecast)
     const { temp_type } = useAppSelector(state => state.currentInfo)
     let now = new Date().getTime()
@@ -43,7 +43,7 @@ const Forecast: React.FC = () => {
             {status === 'error' ?
                 <p className='text-center my-8 text-xl'>Something went wrong, try later</p> :
                 filteredByHours?.length < 5 ?
-                    filteredByHours.map((h, i) =>
+                    filteredByHours.map((h: any, i: number) =>
                         <div key={i} style={{ display: 'flex' }} className='flex items-center flex-col justify-center'>
                             <p className=' text-cyan-200 font-bold flex justify-center'>{(h.time).slice(11)}</p>
                             <p className='flex justify-center'>
@@ -61,7 +61,7 @@ const Forecast: React.FC = () => {
                     <div className=''>
                         <Slider {...settings}>
                             {
-                                filteredByHours ? filteredByHours.map((h, i) =>
+                                filteredByHours ? filteredByHours.map((h: any, i: number) =>
                                     <div key={i} style={{ display: 'flex' }} className='flex items-center flex-col justify-center'>
                                         <p className=' text-cyan-200 font-bold flex justify-center'>{(h.time).slice(11)}</p>
                                         <p className='flex justify-center'>
