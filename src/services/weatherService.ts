@@ -78,12 +78,13 @@ const getForecastInfo = async (cityname: string) => {
 /* Forecast */
 
 /* Get city name by coords */
-
 export const getCityNameByCoords = async (coords: TCoords) => {
     const { latitude, longitude } = coords
     const { data } = await axios
         .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${latitude},${longitude}`)
+
     const { name } = data.location
+
     return name
 }
 /* Get city name by coords */

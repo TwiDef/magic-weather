@@ -15,7 +15,8 @@ import Search from './components/search/Search'
 import './App.css'
 
 export type TCity = {
-    name: string, active: boolean
+    name: string,
+    active: boolean
 }
 
 const App: React.FC = () => {
@@ -51,7 +52,7 @@ const App: React.FC = () => {
     return (
         <>
             <main
-                className='mx-auto xl:w-1/3 lg:w-1/2 md:w-2/3'>
+                className='mx-auto xl:w-2/5 lg:w-1/2 md:w-2/3'>
                 <div className='wrapper'>
                     <Cities cities={cities} removeActiveCity={removeActiveCity} />
                     <Search cities={cities} removeActiveCity={removeActiveCity} />

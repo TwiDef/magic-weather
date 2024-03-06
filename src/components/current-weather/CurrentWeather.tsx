@@ -7,6 +7,8 @@ import { FaThermometerEmpty } from "react-icons/fa";
 import { SiTailwindcss } from "react-icons/si";
 import { Blocks } from 'react-loader-spinner'
 
+import './CurrentWeather.css';
+
 const CurrentWeather: React.FC = () => {
     let [tempOfDayC, setTempOfDayC] = useState<number[]>([])
     let [tempOfDayF, setTempOfDayF] = useState<number[]>([])
@@ -58,7 +60,9 @@ const CurrentWeather: React.FC = () => {
                     <img className=' w-20' src={condition?.icon} alt="icon" />
                 </div>
                 <h3 className='w-28 text-6xl font-bold flex items-center justify-center max-sm:text-5xl'>
-                    {temp_type === 'c' ? temp_c + "°c" : Math.round(temp_f ? temp_f : 0) + "°f"}
+                    {temp_type === 'c' ?
+                        temp_c ?
+                            Math.round(temp_c) + "°c" : 0 : Math.round(temp_f ? temp_f : 0) + "°f"}
                 </h3>
                 <ul className='flex w-28 flex-col items-start justify-center gap-1'>
                     <li className='font-semibold text-sm flex items-center max-sm:text-xs'>
@@ -80,21 +84,21 @@ const CurrentWeather: React.FC = () => {
                     </li>
                 </ul>
             </div>
-            <ul className='flex items-center justify-evenly px-2 mt-2 max-sm:mt-0'>
+            <ul className='additional-info flex items-center justify-evenly px-2 mt-2 max-sm:mt-0'>
                 <li className='font-bold text-xs flex items-center gap-2'>
                     <BsFillSunriseFill />
                     Rise: {astro ? astro.sunrise : '00:00'}
-                </li> |
+                </li> <span className='max-sm:hidden'>|</span>
                 <li className='font-bold text-xs flex items-center gap-2'>
                     <BsFillSunsetFill />
                     Set: {astro ? astro.sunset : '00:00'}
-                </li> |
+                </li> <span className='max-sm:hidden'>|</span>
                 <li className='font-bold text-xs flex items-center gap-2'>
                     <FaArrowUp />
                     High: {temp_type === 'c' ?
                         tempOfDayC ? Math.max(...tempOfDayC) + "°c" : 0 :
                         tempOfDayF ? Math.max(...tempOfDayF) + "°f" : 0}
-                </li> |
+                </li> <span className='max-sm:hidden'>|</span>
                 <li className='font-bold text-xs flex items-center gap-2'>
                     <FaArrowDown />
                     Low: {temp_type === 'c' ?
