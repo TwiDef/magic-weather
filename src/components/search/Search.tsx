@@ -33,7 +33,7 @@ const Search = (props: PropsType) => {
 
     const onGetCoords = async () => {
         const { data } = await axios
-            .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${coords.latitude},${coords.longitude}`)
+            .get(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${coords.latitude},${coords.longitude}`)
         const { name } = data.location
         dispatch(setCity(name))
     }

@@ -14,7 +14,7 @@ export type TLocationInfo = {
 
 const getLocationInfo = async (cityname: string) => {
     const { data } = await axios
-        .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`, {
+        .get(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`, {
             withCredentials: false
         })
 
@@ -38,7 +38,7 @@ export type TCurrentInfo = {
 }
 const getCurrentInfo = async (cityname: string) => {
     const { data } = await axios
-        .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`, {
+        .get(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`, {
             withCredentials: false
         })
 
@@ -64,7 +64,7 @@ export type TForecastInfo = {
 
 const getForecastInfo = async (cityname: string) => {
     const { data } = await axios
-        .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`, {
+        .get(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityname}`, {
             withCredentials: false
         })
 
@@ -81,7 +81,7 @@ const getForecastInfo = async (cityname: string) => {
 export const getCityNameByCoords = async (coords: TCoords) => {
     const { latitude, longitude } = coords
     const { data } = await axios
-        .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${latitude},${longitude}`)
+        .get(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${latitude},${longitude}`)
 
     const { name } = data.location
 
