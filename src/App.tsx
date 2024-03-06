@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { fetchCurrentInfo } from './redux/slices/currentSlice';
 import { fetchLocationInfo } from './redux/slices/locationSlice';
 import { fetchForecastInfo } from './redux/slices/forecastSlice';
+import { setGeoCoords } from './redux/slices/citySlice';
 
 import Cities from './components/cities/Cities'
 import CurrentWeather from './components/current-weather/CurrentWeather'
@@ -18,6 +19,13 @@ export type TCity = {
 }
 
 const App: React.FC = () => {
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords
+            dispatch(setGeoCoords({ latitude, longitude }))
+        })
+    }, [])
 
     const dispatch = useAppDispatch()
     const { cityName } = useAppSelector(state => state.city)

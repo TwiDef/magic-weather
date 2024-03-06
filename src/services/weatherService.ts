@@ -1,6 +1,7 @@
 import axios from "axios";
 import { API_KEY } from "../API_KEY";
 import { TCondition } from "../redux/slices/currentSlice";
+import { TCoords } from "../redux/slices/citySlice";
 
 /* Location */
 export type TLocationInfo = {
@@ -55,7 +56,6 @@ const getCurrentInfo = async (cityname: string) => {
 
 
 /* Forecast */
-
 export type TForecastInfo = {
     astro: any,
     hour: any,
@@ -76,6 +76,17 @@ const getForecastInfo = async (cityname: string) => {
     }
 }
 /* Forecast */
+
+/* Get city name by coords */
+
+export const getCityNameByCoords = async (coords: TCoords) => {
+    const { latitude, longitude } = coords
+    const { data } = await axios
+        .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${latitude},${longitude}`)
+    const { name } = data.location
+    return name
+}
+/* Get city name by coords */
 
 const weatherService = {
     getLocationInfo,

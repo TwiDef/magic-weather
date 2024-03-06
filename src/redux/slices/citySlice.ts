@@ -1,13 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export type TCoords = {
+    latitude: number,
+    longitude: number
+}
+
 interface ICityNameSlice {
     cityName: string
-    searchValue: string
+    searchValue: string,
+    coords: TCoords,
 }
 
 const initialState: ICityNameSlice = {
     cityName: 'Sochi',
-    searchValue: ''
+    searchValue: '',
+    coords: {
+        latitude: 0,
+        longitude: 0
+    }
 }
 
 const citySlice = createSlice({
@@ -22,9 +32,12 @@ const citySlice = createSlice({
         },
         clearSearchValue: (state) => {
             state.searchValue = ''
+        },
+        setGeoCoords: (state, action) => {
+            state.coords = action.payload
         }
-    }
+    },
 })
 
-export const { setCity, setSearchValue, clearSearchValue } = citySlice.actions
+export const { setCity, setSearchValue, clearSearchValue, setGeoCoords } = citySlice.actions
 export default citySlice.reducer

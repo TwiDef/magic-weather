@@ -23,3 +23,11 @@
 .remove-input__btn:active {
     transform: scale(.8);
 }
+
+.geo-btn:hover, .search-btn:hover {
+    transform: scale(1.1);
+}
+.geo-btn:active, .search-btn:active {
+    transform: scale(.9);
+}
+

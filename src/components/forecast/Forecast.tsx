@@ -8,7 +8,7 @@ import './Forecast.css';
 
 const Forecast: React.FC = () => {
     const [filteredByHours, setFilteredByHours] = useState([])
-    const { hour } = useAppSelector(state => state.forecast)
+    const { hour, status } = useAppSelector(state => state.forecast)
     const { temp_type } = useAppSelector(state => state.currentInfo)
     let now = new Date().getTime()
 
@@ -24,54 +24,65 @@ const Forecast: React.FC = () => {
         speed: 500,
         slidesToShow: 5,
         slidesToScroll: 5,
-        className: "slide"
+        className: "slide",
+        responsive: [
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                }
+            }
+        ]
     };
     return (
         <div className='w-full mt-10'>
             <h4 className='uppercase'>hourly forecast</h4>
             <hr className='mt-1' />
-            <div className=''>
-                <Slider {...settings}>
-                    {
-                        filteredByHours ? filteredByHours.map((h, i) =>
-                            <div key={i} style={{ display: 'flex' }} className='flex items-center flex-col justify-center'>
-                                <p className=' text-cyan-200 font-bold flex justify-center'>{(h.time).slice(11)}</p>
-                                <p className='flex justify-center'>
-                                    <img className='w-12 flex justify-center' src={h.condition.icon} alt="" />
-                                </p>
-                                <p className='flex justify-center'>
-                                    {
-                                        temp_type === 'c' ?
-                                            h.temp_c + "°c"
-                                            :
-                                            h.temp_f + "°f"
-                                    }
-                                </p>
-                            </div>) : null
-                    }
-                </Slider>
-            </div>
+
+            {status === 'error' ?
+                <p className='text-center my-8 text-xl'>Something went wrong, try later</p> :
+                filteredByHours?.length < 5 ?
+                    filteredByHours.map((h, i) =>
+                        <div key={i} style={{ display: 'flex' }} className='flex items-center flex-col justify-center'>
+                            <p className=' text-cyan-200 font-bold flex justify-center'>{(h.time).slice(11)}</p>
+                            <p className='flex justify-center'>
+                                <img className='w-12 flex justify-center' src={h.condition.icon} alt="" />
+                            </p>
+                            <p className='flex justify-center'>
+                                {
+                                    temp_type === 'c' ?
+                                        Math.round(h.temp_c) + "°c"
+                                        :
+                                        Math.round(h.temp_f) + "°f"
+                                }
+                            </p>
+                        </div>) :
+                    <div className=''>
+                        <Slider {...settings}>
+                            {
+                                filteredByHours ? filteredByHours.map((h, i) =>
+                                    <div key={i} style={{ display: 'flex' }} className='flex items-center flex-col justify-center'>
+                                        <p className=' text-cyan-200 font-bold flex justify-center'>{(h.time).slice(11)}</p>
+                                        <p className='flex justify-center'>
+                                            <img className='w-12 flex justify-center' src={h.condition.icon} alt="" />
+                                        </p>
+                                        <p className='flex justify-center'>
+                                            {
+                                                temp_type === 'c' ?
+                                                    Math.round(h.temp_c) + "°c"
+                                                    :
+                                                    Math.round(h.temp_f) + "°f"
+                                            }
+                                        </p>
+                                    </div>) : null
+                            }
+                        </Slider>
+                    </div>}
+
         </div>
     );
 
-    /*  return (
-         <div className='w-full mt-10'>
-             <h4 className='uppercase'>hourly forecast</h4>
-             <hr className='mt-1' />
-             <div className='mt-4 grid grid-cols-6 gap-y-6'>
-                 {filteredByHours ? filteredByHours.map((h, i) => <div key={i} className='flex items-center flex-col'>
-                     <p className=' text-cyan-200 font-bold'>{(h.time).slice(11)}</p>
-                     <img className='w-12' src={h.condition.icon} alt="" />
-                     {
-                         temp_type === 'c' ?
-                             h.temp_c + "°c"
-                             :
-                             h.temp_f + "°f"
-                     }
-                 </div>) : null}
-             </div>
-         </div>
-     ); */
 };
 
 export default Forecast;

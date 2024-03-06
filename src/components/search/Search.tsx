@@ -1,4 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import axios from 'axios';
+import { API_KEY } from '../../API_KEY';
 import { toggleTempType } from '../../redux/slices/currentSlice';
 import { setCity, setSearchValue, clearSearchValue } from '../../redux/slices/citySlice';
 import { fetchLocationInfo } from '../../redux/slices/locationSlice'
@@ -22,19 +24,29 @@ type PropsType = {
 const Search = (props: PropsType) => {
     const { temp_type } = useAppSelector(state => state.currentInfo)
     const { searchValue } = useAppSelector(state => state.city)
+    const { coords } = useAppSelector(state => state.city)
     const dispatch = useAppDispatch()
 
     const onChangeTempType = (type: string) => {
         dispatch(toggleTempType(type))
     }
 
+    const onGetCoords = async () => {
+        const { data } = await axios
+            .get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${coords.latitude},${coords.longitude}`)
+        const { name } = data.location
+        dispatch(setCity(name))
+    }
+
     const onSearchInfo = () => {
-        dispatch(fetchLocationInfo(searchValue))
-        dispatch(fetchCurrentInfo(searchValue))
-        dispatch(fetchForecastInfo(searchValue))
-        dispatch(setCity(searchValue))
-        dispatch(clearSearchValue())
-        props.removeActiveCity(props.cities)
+        if (searchValue) {
+            dispatch(fetchLocationInfo(searchValue))
+            dispatch(fetchCurrentInfo(searchValue))
+            dispatch(fetchForecastInfo(searchValue))
+            dispatch(setCity(searchValue))
+            dispatch(clearSearchValue())
+            props.removeActiveCity(props.cities)
+        }
     }
 
     const onHandleKeyDown = (e: any) => {
@@ -62,8 +74,8 @@ const Search = (props: PropsType) => {
                         </button> : null}
                 </div>
                 <div className='search-icons flex px-2 gap-3'>
-                    <button onClick={onSearchInfo}><FaSearch /></button>
-                    <button><BsFillGeoAltFill /></button>
+                    <button className='search-btn' onClick={onSearchInfo}><FaSearch /></button>
+                    <button className='geo-btn' onClick={onGetCoords}><BsFillGeoAltFill /></button>
                 </div>
             </div>
             <div className='search-converter flex items-center'>
