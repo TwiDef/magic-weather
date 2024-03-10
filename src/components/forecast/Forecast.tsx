@@ -34,22 +34,26 @@ const Forecast: React.FC = () => {
 
             {status === 'error' ?
                 <p className='text-center my-8 text-xl'>Something went wrong, try later</p> :
-                filteredByHours?.length < 3 ?
-                    filteredByHours.map((h: any, i: number) =>
-                        <div key={i} style={{ display: 'flex' }} className='flex items-center flex-col justify-center'>
-                            <p className=' text-cyan-200 font-bold flex justify-center'>{(h.time).slice(11)}</p>
-                            <p className='flex justify-center'>
-                                <img className='w-12 flex justify-center' src={h.condition.icon} alt="" />
-                            </p>
-                            <p className='flex justify-center'>
-                                {
-                                    temp_type === 'c' ?
-                                        Math.round(h.temp_c) + "°c"
-                                        :
-                                        Math.round(h.temp_f) + "°f"
-                                }
-                            </p>
-                        </div>) :
+                filteredByHours?.length < 5 ?
+                    <div className='flex items-center justify-center gap-6'>
+                        {filteredByHours.map((h: any, i: number) =>
+                            <div key={i} style={{ display: 'flex' }} className='flex items-center flex-col justify-center'>
+                                <p className=' text-cyan-200 font-bold flex justify-center'>{(h.time).slice(11)}</p>
+                                <p className='flex justify-center'>
+                                    <img className='w-12 flex justify-center' src={h.condition.icon} alt="" />
+                                </p>
+                                <p className='flex justify-center'>
+                                    {
+                                        temp_type === 'c' ?
+                                            Math.round(h.temp_c) + "°c"
+                                            :
+                                            Math.round(h.temp_f) + "°f"
+                                    }
+                                </p>
+                            </div>)
+                        }
+                    </div>
+                    :
                     <div className=''>
                         <Slider {...settings}>
                             {
