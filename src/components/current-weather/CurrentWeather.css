@@ -1,4 +1,10 @@
-@media (max-width: 640px) {
+.additional-info {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+@media (max-width: 620px) {
     .additional-info {
             display: grid;
             grid-template-columns: repeat(2, 1fr);

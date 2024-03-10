@@ -84,7 +84,7 @@ const CurrentWeather: React.FC = () => {
                     </li>
                 </ul>
             </div>
-            <ul className='additional-info flex items-center justify-evenly px-2 mt-2 max-sm:mt-0'>
+            <ul className='additional-info px-2 mt-1'>
                 <li className='font-bold text-xs flex items-center gap-2'>
                     <BsFillSunriseFill />
                     Rise: {astro ? astro.sunrise : '00:00'}

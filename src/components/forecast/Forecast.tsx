@@ -24,17 +24,9 @@ const Forecast: React.FC = () => {
         speed: 500,
         slidesToShow: 5,
         slidesToScroll: 5,
-        className: "slide",
-        responsive: [
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3
-                }
-            }
-        ]
+        className: "slide"
     };
+
     return (
         <div className='w-full mt-10'>
             <h4 className='uppercase'>hourly forecast</h4>
@@ -42,7 +34,7 @@ const Forecast: React.FC = () => {
 
             {status === 'error' ?
                 <p className='text-center my-8 text-xl'>Something went wrong, try later</p> :
-                filteredByHours?.length < 5 ?
+                filteredByHours?.length < 3 ?
                     filteredByHours.map((h: any, i: number) =>
                         <div key={i} style={{ display: 'flex' }} className='flex items-center flex-col justify-center'>
                             <p className=' text-cyan-200 font-bold flex justify-center'>{(h.time).slice(11)}</p>

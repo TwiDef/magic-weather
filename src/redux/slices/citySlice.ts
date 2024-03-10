@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export type TCoords = {
-    latitude: number,
-    longitude: number
+    latitude: number | null,
+    longitude: number | null
 }
 
 interface ICityNameSlice {
@@ -15,8 +15,8 @@ const initialState: ICityNameSlice = {
     cityName: 'Sochi',
     searchValue: '',
     coords: {
-        latitude: 0,
-        longitude: 0
+        latitude: null,
+        longitude: null
     }
 }
 

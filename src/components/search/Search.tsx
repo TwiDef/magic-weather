@@ -6,6 +6,7 @@ import { setCity, setSearchValue, clearSearchValue } from '../../redux/slices/ci
 import { fetchLocationInfo } from '../../redux/slices/locationSlice'
 import { fetchCurrentInfo } from '../../redux/slices/currentSlice'
 import { fetchForecastInfo } from '../../redux/slices/forecastSlice'
+import { setGeoCoords } from '../../redux/slices/citySlice';
 
 import { FaSearch } from "react-icons/fa";
 import { BsFillGeoAltFill } from "react-icons/bs";
@@ -32,6 +33,11 @@ const Search = (props: PropsType) => {
     }
 
     const onGetCoords = async () => {
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords
+            dispatch(setGeoCoords({ latitude, longitude }))
+        })
+
         const { data } = await axios
             .get(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${coords.latitude},${coords.longitude}`)
         const { name } = data.location
@@ -60,7 +66,7 @@ const Search = (props: PropsType) => {
              max-sm:gap-0 max-2xl:gap-4'>
                 <div className='relative'>
                     <input
-                        className='city-input bg-slate-200 p-1 px-2 rounded-lg text-lg text-black placeholder:text-lg'
+                        className='city-input w-60 bg-slate-200 p-1 px-2 rounded-lg text-lg text-black placeholder:text-lg max-sm:w-44'
                         value={searchValue}
                         onChange={(e) => dispatch(setSearchValue(e.target.value))}
                         onKeyDown={(e) => onHandleKeyDown(e)}
