@@ -36,7 +36,7 @@ const Forecast: React.FC = () => {
                 <p className='text-center my-8 text-xl'>Something went wrong, try later</p> :
                 filteredByHours?.length < 5 ?
                     <div className='flex items-center justify-center gap-6 mt-5'>
-                        {filteredByHours.map((h: any, i: number) =>
+                        {(hour.slice(19)).map((h: any, i: number) =>
                             <div key={i} style={{ display: 'flex' }} className='flex items-center flex-col justify-center'>
                                 <p className=' text-cyan-200 font-bold flex justify-center'>{(h.time).slice(11)}</p>
                                 <p className='flex justify-center'>
