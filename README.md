@@ -1,1 +1,1 @@
-https://twidef.github.io/magic-weather/
+[magic-weather](https://twidef.github.io/magic-weather/ "Click me")
